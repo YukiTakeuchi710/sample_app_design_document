@@ -1,0 +1,12 @@
+@startuml
+class user {}
+class micropost {
+    +integer id
+    #integer user_id
+    text content
+    integer range
+    file image
+}
+
+user --* micropost :POST投稿\n range 公開範囲\n content 本文\n image 画像 
+@enduml

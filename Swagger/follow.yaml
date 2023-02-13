@@ -1,0 +1,12 @@
+swagger: '2.0'
+  info:
+    title: 'follow'
+    description:
+      フォロー機能
+    
+    version: 1.0.0.0
+  paths:
+    /relationships
+      post:
+      
+

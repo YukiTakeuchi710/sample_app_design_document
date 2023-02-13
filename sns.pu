@@ -1,0 +1,15 @@
+@startuml
+title SNS
+class user {    
+    integer id
+    String name
+}
+
+user -|> micropost
+
+class micropost {
+    integer id
+    integer user_id
+    text content 投稿
+}
+@enduml

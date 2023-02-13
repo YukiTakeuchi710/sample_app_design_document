@@ -1,0 +1,40 @@
+@startuml
+
+class user {
+    +user_id
+}
+
+
+class relationship {
+    #followed_id
+    #follower_id
+}
+
+
+class micropost {
+   # user_id
+    range
+}
+
+'class mute {
+'    #muter_id
+'    #muted_id
+'}
+
+class block {
+    #blocker_id
+    #blocked_id
+}
+
+user --* micropost :feed
+
+' 公開範囲の仕様
+micropost -- relationship :rangeによって公開範囲を指定、\nrelationshipからフォロー関係を調べる。
+'relationship -- 投稿user :range 1:follwer-userの場合 検索user.user_id
+
+' muteの仕様
+'user --* mute :muted_idに検索者が入っているデータがある場合
+'mute -- micropost :検索者.id == muter_id で絞込まれたデータ群をmute.muted_id == micropost.user_idの投稿は検索から外す。（最優先する）
+
+' blockの仕様
+@enduml

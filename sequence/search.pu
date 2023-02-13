@@ -1,0 +1,29 @@
+@startuml
+actor ユーザー
+participant StaticPagesController order 1
+participant MicropostSearchController order 2
+participant StaticPagesController order 3
+participant "Micopost Class" order 4
+participant "Micropost::ActiveRecordRelation" order 5
+
+activate "MicropostSearchController"
+ユーザー -> MicropostSearchController : get "/Search" :Searchをクリック
+ユーザー -> MicropostSearchController :search(keyword)
+
+
+MicropostSearchController -> "Micropost Class":query
+activate "Micropost Class"
+MicropostSearchController <-- "Micropost Class":return Micropost::ActiveRecordRelation
+deactivate "MicropostSearchController"
+activate "Micropost::ActiveRecordRelation"
+"Micropost Class" -> "Micropost::ActiveRecordRelation":order(created_at:desc)
+"Micropost Class" -> "Micropost::ActiveRecordRelation":page(0)
+deactivate "Micropost::ActiveRecordRelation"
+deactivate "Micropost Class"
+ユーザー <-- MicropostSearchController:rending
+deactivate "Micropost::ActiveRecordRelation"
+activate "StaticPagesController"
+ユーザー <<-- StaticPagesController : Home画面を返す。
+deactivate "StaticPagesController"
+
+@enduml

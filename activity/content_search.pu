@@ -1,0 +1,15 @@
+@startuml
+
+class user {
+    +user_id
+}
+class micropost {
+    #content
+}
+class search_type {
+    +search_type_id
+}
+user - search_type :search_type:1（投稿内容)の場合\ncontent_searchが実行される。
+user --* micropost :micropostのcontent検索する。\n(feedの条件に追加する形)\nテキストの入力内容と全後方一致
+
+@enduml

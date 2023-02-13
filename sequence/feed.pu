@@ -1,0 +1,16 @@
+@startuml
+actor ユーザー
+ユーザー -> StaticPagesController : get "/Home" :Searchをクリック
+activate "StaticPagesController"
+ユーザー <<-- StaticPagesController : 投稿一覧画面を返す。
+deactivate "StaticPagesController"
+activate "MicopostsController"
+ユーザー -> MicopostsController :search(keyword)
+MicopostsController -> "Micropost Class":query
+MicopostsController <-- "Micropost Class":return Micropost::ActiveRecordRelation
+MicopostsController -> "Micropost::ActiveRecordRelation":order(created_at:desc)
+MicopostsController -> "Micropost::ActiveRecordRelation":page(0)
+ユーザー <-- MicopostsController:rending
+deactivate "MicopostsController"
+
+@enduml

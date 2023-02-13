@@ -1,0 +1,13 @@
+@startuml
+class user {
+    integer id
+}
+class relationship {
+    integer id
+    integer followed_id
+    integer follower_id
+}
+
+user --* relationship :post投稿 follower_id 操作ユーザのid followed_id: follow対象のuser_idでcreate
+
+@enduml

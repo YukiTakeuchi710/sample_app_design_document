@@ -1,0 +1,19 @@
+@startuml
+title SNS
+class user {
+    +integer id
+}
+class micropost {
+    +integer id 
+    -integer user_id
+}
+
+class relationship {
+    +integer id
+    -integer follower_id :user_id
+    -integer followed_id :user_id
+}
+
+user --* micropost :投稿・参照
+user -- relationship :user_idでユーザー同士の結合を行う。
+@enduml

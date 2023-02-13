@@ -1,0 +1,13 @@
+@startuml
+class user {
+    integer id
+}
+class mute {
+    integer id
+    integer muted_id
+    integer muter_id
+}
+
+user --* mute :mute実行 \n muter_id 自分のuser_id \n muted_id:対象のuser_id \nmuteをcreate
+
+@enduml
