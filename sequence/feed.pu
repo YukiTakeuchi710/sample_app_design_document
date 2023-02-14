@@ -9,7 +9,7 @@ activate "MicopostsController"
 MicopostsController -> "Micropost Class":query
 MicopostsController <-- "Micropost Class":return Micropost::ActiveRecordRelation
 MicopostsController -> "Micropost::ActiveRecordRelation":order(created_at:desc)
-MicopostsController -> "Micropost::ActiveRecordRelation":page(0)
+MicopostsController <-- "Micropost::ActiveRecordRelation":page(0)
 ユーザー <-- MicopostsController:rending
 deactivate "MicopostsController"
 
