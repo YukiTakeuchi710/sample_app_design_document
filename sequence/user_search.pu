@@ -1,0 +1,25 @@
+@startuml
+actor ユーザー
+participant UserSearchController order 2
+participant "User Class" order 4
+participant "User::ActiveRecordRelation" order 5
+
+activate "UserSearchController"
+ユーザー -> UserSearchController : get "/Search" :Searchをクリックし、search(keyword)を展開
+
+
+UserSearchController -> "User Class":query
+activate "User Class"
+UserSearchController <-- "User Class":return User::ActiveRecordRelation
+activate "User::ActiveRecordRelation"
+"User Class" -> "User::ActiveRecordRelation":user.nameをkeywordと前後like検索を行う。
+"User Class" <-- "User::ActiveRecordRelation":
+deactivate "User::ActiveRecordRelation"
+UserSearchController <-- "User Class" :条件に合ったUsersのデータを返す。
+deactivate "User Class"
+ユーザー <-- UserSearchController:Usersのrenderを更新する。
+deactivate "UserSearchController"
+
+deactivate "User::ActiveRecordRelation"
+
+@enduml

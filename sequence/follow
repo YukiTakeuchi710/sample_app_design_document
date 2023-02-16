@@ -1,0 +1,13 @@
+@startuml
+actor ユーザー
+
+participant RelationshipsController order 1
+participant "User Class" order 2
+participant "Relationship::ActiveRecordRelation" order 3
+ユーザー -> RelationshipsController :「Follow」をクリックする。
+RelationshipsController -> "User Class":create:開いているユーザIDとログインIDを取得する。
+"User Class" -> "Relationship::ActiveRecordRelation": データの作成を実行する。
+"User Class" <-- "Relationship::ActiveRecordRelation": 結果を確認する。
+RelationshipsController <-- "User Class": Userとrelationshipの関係を更新する。
+ユーザー <-- RelationshipsController :レスポンスを返して、turboからボタンを「Unfollow」に切り替える。 
+@enduml

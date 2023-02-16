@@ -1,0 +1,17 @@
+@startuml
+actor ユーザー
+participant LikedUsersController order 1
+participant "Micropost Class" order 2
+participant "Like Class" order 3
+participant "User Class" order 4
+participant "User::ActiveRecordRelation" order 5
+ユーザー -> LikedUsersController :「Follow」をクリックする。
+LikedUsersController -> "Micropost Class":liked_usersを取得、
+"Micropost Class" -> "Like Class":Micropost.idからLikeの一覧を取得
+"Like Class" -> "User Class":Like.idからUsersの一覧を取得
+"User Class" -> "User::ActiveRecordRelation": データの検索を実行する。
+"Micropost Class" <-- "User::ActiveRecordRelation": 結果を確認する。
+LikedUsersController <-- "Micropost Class": UserとMicroPostの関係を更新する。
+ユーザー <-- LikedUsersController :小さい画面にliked_usersを取得する。
+
+@enduml

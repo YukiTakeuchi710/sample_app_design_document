@@ -1,0 +1,13 @@
+@startuml
+actor ユーザー
+participant LikesController order 1
+participant "Micropost Class" order 2
+participant "Like::ActiveRecordRelation" order 3
+ユーザー -> LikesController :「Follow」をクリックする。
+LikesController -> "Micropost Class":create:Micropost.idとログインユーザIDを取得する。
+"Micropost Class" -> "Like::ActiveRecordRelation": データの作成を実行する。
+"Micropost Class" <-- "Like::ActiveRecordRelation": 結果を確認する。
+LikesController <-- "Micropost Class": UserとMicroPostの関係を更新する。
+ユーザー <-- LikesController :レスポンスを返して、turboからボタンを「Unfollow」に切り替える。 
+
+@enduml

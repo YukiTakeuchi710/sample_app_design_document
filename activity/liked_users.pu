@@ -1,0 +1,18 @@
+@startuml
+class Micropost {
+    +integer id
+
+
+}
+class Like {
+    +integer id
+    #integer micropost_id
+    #integer user_id 
+}
+class User {
+    +integer id
+}
+
+Micropost -* Like :Micropost.liked_usersでユーザIDを取得する。
+Like - User :ユーザ情報
+@enduml

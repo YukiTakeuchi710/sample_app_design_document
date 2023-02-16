@@ -1,0 +1,13 @@
+@startuml
+actor ユーザー
+participant BadsController order 1
+participant "Micropost Class" order 2
+participant "Bad::ActiveRecordRelation" order 3
+ユーザー -> BadsController :「Follow」をクリックする。
+BadsController -> "Micropost Class":create:Micropost.idとログインユーザIDを取得する。
+"Micropost Class" -> "Bad::ActiveRecordRelation": データの作成を実行する。
+"Micropost Class" <-- "Bad::ActiveRecordRelation": 結果を確認する。
+BadsController <-- "Micropost Class": UserとMicroPostの関係を更新する。
+ユーザー <-- BadsController :レスポンスを返して、turboからボタンを「Unfollow」に切り替える。 
+
+@enduml

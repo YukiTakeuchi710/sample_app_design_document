@@ -1,0 +1,17 @@
+@startuml
+class user {
+    +integer id
+}
+class micropost {
+    +integer id
+}
+class like {
+    +integer id
+    #integer like_id
+    #integer micropost_id
+}
+
+user -* micropost:micropostの検索を行う。
+micropost -- like :likeを押すと\nuser.idとmicropost.idを登録する。
+
+@enduml
